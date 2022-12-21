@@ -1,5 +1,6 @@
 package ir.parsa2820.kingdomquiz.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.google.gson.JsonObject;
 import java.util.Locale;
 import java.util.Objects;
 
+import ir.parsa2820.kingdomquiz.GameActivity;
 import ir.parsa2820.kingdomquiz.MainActivity;
 import ir.parsa2820.kingdomquiz.R;
 import ir.parsa2820.kingdomquiz.databinding.FragmentHomeBinding;
@@ -32,7 +34,8 @@ import ir.parsa2820.kingdomquiz.model.User;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private String baseUrl = "https://opentdb.com/api.php?";
+    private final String baseUrl = "https://opentdb.com/api.php?";
+    private Button startGameButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +45,10 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final Button startGameButton = binding.buttonStartGame;
+        startGameButton = binding.buttonStartGame;
+        startGameButton.setEnabled(true);
         startGameButton.setOnClickListener(v -> {
+            startGameButton.setEnabled(false);
             User user = ((MainActivity) requireActivity()).getUser();
             StringBuilder url = new StringBuilder(baseUrl);
             url.append("amount=");
@@ -62,14 +67,21 @@ public class HomeFragment extends Fragment {
             RequestQueue queue = Volley.newRequestQueue(requireContext());
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url.toString(),
                     response -> {
-                        Gson gson = new Gson();
-                        JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
-                        Question[] questions = gson.fromJson(jsonObject.get("results"), Question[].class);
+                        Intent intent = new Intent(requireContext(), GameActivity.class);
+                        intent.putExtra("questions", response);
+                        intent.putExtra("currentUser", user.getEmail());
+                        startActivity(intent);
                     }, error -> {
             });
             queue.add(stringRequest);
         });
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        startGameButton.setEnabled(true);
     }
 
     @Override

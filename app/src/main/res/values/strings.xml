@@ -25,4 +25,7 @@
     <string name="username">Username</string>
     <string name="logout">Logout</string>
     <string name="start_game">Start Game</string>
+    <string name="done">Done</string>
+    <string name="score_placeholder">Take the quiz to see your score!</string>
+    <string name="close">Close</string>
 </resources>

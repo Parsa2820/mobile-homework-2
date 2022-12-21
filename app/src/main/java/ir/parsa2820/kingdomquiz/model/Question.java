@@ -2,6 +2,8 @@ package ir.parsa2820.kingdomquiz.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Locale;
+
 public class Question {
     private String category;
     private String type;
@@ -34,6 +36,14 @@ public class Question {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public int getDifficultyDegree() {
+        if (difficulty.equalsIgnoreCase("easy"))
+            return 1;
+        if (difficulty.equalsIgnoreCase("medium"))
+            return 2;
+        return 3;
     }
 
     public String getQuestion() {

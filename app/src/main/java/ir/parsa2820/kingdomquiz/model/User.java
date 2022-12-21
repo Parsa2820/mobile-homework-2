@@ -27,8 +27,8 @@ public class User {
         }
         this.email = email;
         this.password = password;
-        difficulty = "any";
-        category = "any";
+        difficulty = "ANY";
+        category = "ANY";
         numberOfQuestions = "10";
         name = "";
         number = "";

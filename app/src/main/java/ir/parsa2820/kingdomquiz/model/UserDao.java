@@ -16,6 +16,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE email = :email")
     User findByEmail(String email);
 
+    @Query("SELECT * FROM user ORDER BY score DESC LIMIT 1")
+    User getHighestScore();
+
     @Insert
     void insertAll(User... users);
 
