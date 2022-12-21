@@ -1,4 +1,4 @@
-package ir.parsa2820.kingdomquiz.ui.slideshow;
+package ir.parsa2820.kingdomquiz.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ir.parsa2820.kingdomquiz.databinding.FragmentSlideshowBinding;
+import ir.parsa2820.kingdomquiz.databinding.FragmentProfileBinding;
 
-public class SlideshowFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentProfileBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        ProfileViewModel slideshowViewModel =
+                new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;

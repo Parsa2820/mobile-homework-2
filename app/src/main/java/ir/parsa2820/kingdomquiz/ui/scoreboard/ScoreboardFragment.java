@@ -1,4 +1,4 @@
-package ir.parsa2820.kingdomquiz.ui.gallery;
+package ir.parsa2820.kingdomquiz.ui.scoreboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ir.parsa2820.kingdomquiz.databinding.FragmentGalleryBinding;
+import ir.parsa2820.kingdomquiz.databinding.FragmentScoreboardBinding;
 
-public class GalleryFragment extends Fragment {
+public class ScoreboardFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentScoreboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        ScoreboardViewModel galleryViewModel =
+                new ViewModelProvider(this).get(ScoreboardViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentScoreboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
