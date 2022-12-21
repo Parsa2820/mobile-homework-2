@@ -19,6 +19,9 @@ public interface UserDao {
     @Query("SELECT * FROM user ORDER BY score DESC LIMIT 1")
     User getHighestScore();
 
+    @Query("SELECT * FROM user ORDER BY score DESC")
+    List<User> getAllOrderByScore();
+
     @Insert
     void insertAll(User... users);
 
