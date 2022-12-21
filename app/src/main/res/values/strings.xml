@@ -19,4 +19,9 @@
     <string name="difficulty">Difficulty</string>
     <string name="category">Category</string>
     <string name="number_of_questions">Number of Questions</string>
+    <string name="name">Name</string>
+    <string name="change">(Change)</string>
+    <string name="new_value">New value</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
 </resources>
