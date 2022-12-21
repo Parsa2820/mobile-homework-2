@@ -1,5 +1,8 @@
 package ir.parsa2820.kingdomquiz;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -14,10 +18,12 @@ import ir.parsa2820.kingdomquiz.model.User;
 import ir.parsa2820.kingdomquiz.model.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String PREFS_NAME = "state";
     private UserDao userDao;
     private EditText emailEditText;
     private EditText passwordEditText;
     private TextView errorTextView;
+    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,25 @@ public class LoginActivity extends AppCompatActivity {
         errorTextView = findViewById(R.id.textViewError);
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "local-database").allowMainThreadQueries().build();
         userDao = db.userDao();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("currentUser", currentUser);
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        currentUser = settings.getString("currentUser", null);
+        if (currentUser != null) {
+            goToMain();
+        }
     }
 
     public void register(View view) {
@@ -56,12 +81,16 @@ public class LoginActivity extends AppCompatActivity {
             errorTextView.setText("Email does not exists");
         } else if (user.getPassword().equals(password)) {
             errorTextView.setText("Login successfully");
+            currentUser = email;
+            goToMain();
         } else {
             errorTextView.setText("Incorrect password");
         }
     }
 
     private void goToMain() {
-
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.putExtra("currentUser", currentUser);
+        LoginActivity.this.startActivity(intent);
     }
 }
