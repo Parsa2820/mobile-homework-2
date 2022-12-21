@@ -24,4 +24,5 @@
     <string name="new_value">New value</string>
     <string name="username">Username</string>
     <string name="logout">Logout</string>
+    <string name="start_game">Start Game</string>
 </resources>

@@ -19,6 +19,7 @@ public class User {
     private String name;
     private String number;
     private String username;
+    private int score;
 
     public User(@NonNull String email, @NonNull String password) throws Exception {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -32,6 +33,7 @@ public class User {
         name = "";
         number = "";
         username = "";
+        score = 0;
     }
 
     public User() {
@@ -102,5 +104,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }
