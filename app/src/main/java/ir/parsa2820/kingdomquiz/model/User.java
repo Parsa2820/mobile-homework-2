@@ -13,6 +13,9 @@ public class User {
     private String email;
     @NonNull
     private String password;
+    private String difficulty;
+    private String category;
+    private String numberOfQuestions;
 
     public User(@NonNull String email, @NonNull String password) throws Exception {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -20,6 +23,9 @@ public class User {
         }
         this.email = email;
         this.password = password;
+        difficulty = "any";
+        category = "any";
+        numberOfQuestions = "10";
     }
 
     public User() {
@@ -42,5 +48,29 @@ public class User {
 
     public void setPassword(@NonNull String password) {
         this.password = password;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(String numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
     }
 }

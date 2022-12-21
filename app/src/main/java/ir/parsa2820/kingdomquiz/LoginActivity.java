@@ -16,7 +16,7 @@ import ir.parsa2820.kingdomquiz.model.User;
 import ir.parsa2820.kingdomquiz.model.UserDao;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String PREFS_NAME = "state";
+    public static final String PREFS_NAME = "state";
     private UserDao userDao;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -87,8 +87,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToMain() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("currentUser", currentUser);
+        editor.apply();
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra("currentUser", currentUser);
         LoginActivity.this.startActivity(intent);
     }
 }
